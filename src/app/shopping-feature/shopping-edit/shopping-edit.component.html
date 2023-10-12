@@ -1,0 +1,59 @@
+<div>
+  <form (ngSubmit)="submitHandler(shoppingForm)" #shoppingForm="ngForm">
+    <div class="flex flex-col sm:flex-row">
+      <div class="w-full sm:w-5/12">
+        <label for="name">Name:</label>
+        <input
+          ngModel
+          #name="ngModel"
+          name="name"
+          required
+          class="border-2 rounded-md block"
+          type="text"
+          id="name"
+        />
+        <p *ngIf="name.invalid && name.touched">Required</p>
+      </div>
+      <div class="w-full sm:w-2/12">
+        <label for="amount">Amount:</label>
+        <input
+          ngModel
+          #amount="ngModel"
+          name="amount"
+          required
+          min="1"
+          class="border-2 rounded-md block"
+          type="number"
+          id="amount"
+        />
+        <p *ngIf="amount.invalid && amount.touched">
+          <span *ngIf="amount.errors?.['required']">Required</span>
+          <span *ngIf="amount.errors?.['min']"
+            >Min is: {{amount.errors?.['min'].min}} and u entered:
+            {{amount.errors?.['min'].actual}}</span
+          >
+        </p>
+      </div>
+    </div>
+    <div class="mt-4 flex gap-3">
+      <app-button
+        [disabled]="shoppingForm.invalid"
+        [type]="'submit'"
+        [buttonStyle]="'success'"
+        [buttonText]="inEditMode ? 'Edit' : 'Add'"
+      ></app-button>
+      <app-button
+        [buttonStyle]="'danger'"
+        [disabled]="!inEditMode"
+        [buttonText]="'Delete'"
+        (buttonClick)="delete()"
+      ></app-button>
+      <app-button
+        [type]="'reset'"
+        [buttonText]="'Clear'"
+        (buttonClick)="clear()"
+        [disabled]="shoppingForm.pristine && !shoppingForm.dirty && !allowClear"
+      ></app-button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,17 @@
+<div class="flex flex-col sm:flex-row">
+  <div class="w-full sm:w-10/12">
+    <app-shopping-edit></app-shopping-edit>
+    <hr class="my-4" />
+    <ul>
+      <li
+        class="border-2 border-b-0 last-of-type:border-b-2 p-3 cursor-pointer"
+        *ngFor="let ingredient of ingredients"
+        (click)="onEditItem(ingredient.id)"
+      >
+        <a
+          >{{ ingredient.name }} ({{ ingredient.amount }})</a
+        >
+      </li>
+    </ul>
+  </div>
+</div>

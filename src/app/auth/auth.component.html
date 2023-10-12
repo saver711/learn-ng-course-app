@@ -1,0 +1,39 @@
+<span *ngIf="isLoading" class="loader"></span>
+<form *ngIf="!isLoading" #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+  <div>
+    <label for="email">Email: </label>
+    <input
+      type="email"
+      class="border-2 m-2 px-5 py-2"
+      name="email"
+      id="email"
+      ngModel
+      required
+      email
+      aria-describedby="email"
+      placeholder="Email"
+    />
+  </div>
+  <div>
+    <label for="password">Password: </label>
+    <input
+      type="password"
+      class="border-2 m-2 px-5 py-2"
+      name="password"
+      id="password"
+      ngModel
+      required
+      minlength="6"
+      aria-describedby="password"
+      placeholder="Password"
+    />
+  </div>
+  <div>
+    <app-button type="submit" [disabled]="authForm.invalid" buttonText="{{isLoginMode ? 'Login' : 'Sign up'}}" buttonStyle="primary"></app-button> | 
+    <app-button  buttonText="Switch to {{!isLoginMode ? 'Login' : 'Sign up'}}" buttonStyle="primary" (buttonClick)="onSwitchMode()"></app-button>
+  </div>
+
+  <ul>
+    <li *ngFor="let error of errors">{{error}}</li>
+  </ul>
+</form>

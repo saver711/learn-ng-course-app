@@ -1,0 +1,7 @@
+<div>
+    <app-button [buttonText]="buttonText" (click)="onButtonClick()"></app-button>
+</div>
+<hr class="my-4">
+<div>
+    <app-recipe-item *ngFor="let recipe of recipes" [recipe]="recipe"></app-recipe-item>
+</div>
